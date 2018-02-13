@@ -4,7 +4,8 @@
   "description": "Uses Express to build a single-page client-server app that generates CSV reports from JSON data.",
   "main": "index.js",
   "scripts": {
-    "test": "'start': 'index.js'"
+    "start": "node index.js",
+    "test": "index.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/c4carlton/csvreportgenerator/issues"
   },
-  "homepage": "https://github.com/c4carlton/csvreportgenerator#readme"
+  "homepage": "https://github.com/c4carlton/csvreportgenerator#readme",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "express": "^4.16.2"
+  }
 }
