@@ -6,8 +6,17 @@
   <body>
   	<div>
       <h1>JSON to CSV LAND</h1>
-      <textarea type="text" name="json" cols="50" rows="20"></textarea>
-      <input type="Submit" value="Submit">
+        <textarea type="text" id="input" name="json" cols="50" rows="20"></textarea>
+        <input id="button1" type="Submit" value="Submit"></input>
+        <!-- <input id="button2" type="Submit" value="Return"></input> -->      
+      <textarea type="text" id="csvoutput"name="json" cols="50" rows="20"></textarea>
     </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">  	
+    </script>
+    <script type="text/javascript" src="/src/app.js"></script>
   </body>
 </html>

@@ -1,13 +1,32 @@
 // Express app
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const path = require('path');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var path = require('path');
+// const http = require("http");
+// var port = 3001
 
+// app.set('port', 3001);
+// app.use(express.static('../client/dist'));
+// app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// app.set('port', 3000);
-app.use(express.static('../client/dist'));
-app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname, 'server')));
+app.post('/', function(req,res){
+	var body = ''
+  req.on('data', (chunk) => {
+    body += chunk
+  })
+  req.on('end', function () {
+    res.writeHead(200);
+    console.log(typeof body)
+    res.end(body);
+  });
+}) 
 
-app.listen(3001, function () { console.log('CSVReportGen app listening on port 3000!') });
+// app.get('/', function(req,res) {
+
+// })
+
+app.listen(3001)
+console.log('Listening....')
+
