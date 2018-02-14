@@ -3,11 +3,6 @@ var express = require('express');
 var app = express();
 // var bodyParser = require('body-parser');
 var path = require('path');
-// const http = require("http");
-// var port = 3001
-// app.set('port', 3001);
-// app.use(express.static('../client/dist'));
-// app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.post('/', function(req,res){
@@ -17,32 +12,38 @@ app.post('/', function(req,res){
   });
   req.on('end', function() {
   	body = JSON.parse(body);
-  	ConvertToCSV(body);
-    res.writeHead(200);
-      console.log(typeof body); //console log
-      console.log(body);  //console.log
-    res.end(JSON.stringify(body));
+  	CSV(body)
+  	console.log(body, 'this is body')
+    res.status(200).end(JSON.stringify(dog));
   });
 });
 
 
-function CSV(array) {
-// Use first element to choose the keys and the order
-    var keys = Object.keys(array[0]);
+var CSV = function(array) {
+  var result = [];
+  var traverse = function(obj) {
+    result.push(csvMaker(obj))
+    for (var j = 0; j < obj.children.length; j++) {
+      traverse(obj.children[i])
+    }
+  }
+  for (var k = 0; k < array.length; k++) {
+    traverse(array[k]);
+  }
+ 
+  return result.join('\n');
+}
 
-    // Build header
-    var result = keys.join("\t") + "\n";
-
-    // Add the rows
-    array.forEach(function(obj){
-        keys.forEach(function(k, ix){
-            if (ix) result += "\t";
-            result += obj[k];
-        });
-        result += "\n";
-    });
-
-    return result;
+var csvMaker = function (obj) {
+  var result = [];
+  var keys = Object.keys(obj)
+  for (var key in obj) {
+    if (key === 'children') {
+      continue;
+    }
+    result.push(key + ' ' + obj[key])
+  }
+  return result.join(', ')
 }
 
 app.listen(3001)
